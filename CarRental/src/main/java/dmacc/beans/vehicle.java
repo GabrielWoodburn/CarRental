@@ -1,5 +1,8 @@
 package dmacc.beans;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class vehicle {
 	private long id;
 	private String model;
