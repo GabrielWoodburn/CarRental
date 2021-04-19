@@ -10,6 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 @Entity
 public class Dealership {
 	@Id
