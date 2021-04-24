@@ -7,7 +7,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 @Embeddable
 public class vehicle {
 	private long id;

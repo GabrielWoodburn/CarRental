@@ -15,6 +15,13 @@ public class WebController {
 	@Autowired
 	DealershipRepository repo;
 
+	@GetMapping("/inputDealership")
+	public String addNewDealership(Model model) {
+		Dealership d = new Dealership();
+		model.addAttribute("newDealership", d);
+		return "input";
+	}
+	
 	@GetMapping({ "/", "viewAll" })
 	public String viewAllDealerships(Model model) {
 		if(repo.findAll().isEmpty()) {
@@ -23,21 +30,6 @@ public class WebController {
 		
 		model.addAttribute("dealerships", repo.findAll());
 		return "results";
-	}
-
-	@GetMapping("/inputDealership")
-	public String addNewDealership(Model model) {
-		Dealership d = new Dealership();
-		model.addAttribute("newDealership", d);
-		return "input";
-	}
-
-	@GetMapping("/edit/{id}")
-	public String showUpdateDealership(@PathVariable("id") long id, Model model) {
-		Dealership d = repo.findById(id).orElse(null);
-		System.out.println("ITEM TO EDIT: " + d.toString());
-		model.addAttribute("newDealership", d);
-		return "input";
 	}
 
 	@PostMapping("/update/{id}")
@@ -52,4 +44,13 @@ public class WebController {
 	    repo.delete(d);
 	    return viewAllDealerships(model);
 	}
+
+	@GetMapping("/edit/{id}")
+	public String showUpdateDealership(@PathVariable("id") long id, Model model) {
+		Dealership d = repo.findById(id).orElse(null);
+		System.out.println("ITEM TO EDIT: " + d.toString());
+		model.addAttribute("newDealership", d);
+		return "input";
+	}
+	
 }
