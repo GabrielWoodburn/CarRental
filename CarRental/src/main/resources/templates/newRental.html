@@ -16,7 +16,7 @@
 					<select id="customer" th:field="*{customer}">
 						<option value=""> -- </option>
 						<option th:each="customer: ${customers}"
-							th:value="${customer.id}" th:text="${customer.custName}"></option>
+							th:value="${customer.custId}" th:text="${customer.custName}"></option>
 					</select> <br />	
 				</td>
 			<tr>

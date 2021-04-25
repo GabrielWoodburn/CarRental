@@ -20,14 +20,14 @@
 				<th class="action" th:colspan="2">Action</th>
 			</tr>
 			<tr th:each="cust:${customers}">
-				<td class="id" th:text="${cust.custId}"></td>
+				<td class="id" th:text="${cust.id}"></td>
 				<td class="name" th:text="${cust.custName}"></td>
 				<td class="birthdate" th:text="${#dates.format(cust.birthdate,'MM-dd-yyyy')}"></td>
 				<td class="license" th:text="${cust.driversLicense}"></td>
 				<td class="insurance" th:text="${cust.insurance}"></td>
 				<td class="phone" th:text="${cust.phoneNumber}"></td>
-				<td class="action"><a th:href="@{/editCust/{id}(id=${cust.custId})}">Edit</a></td>
-				<td class="action"><a th:href="@{/deleteCust/{id}(id=${cust.custId})}">Delete</a></td>
+				<td class="action"><a th:href="@{/editCust/{id}(id=${cust.id})}">Edit</a></td>
+				<td class="action"><a th:href="@{/deleteCust/{id}(id=${cust.id})}">Delete</a></td>
 			</tr>
 		</table>
 	</form>
