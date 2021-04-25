@@ -1,8 +1,8 @@
-package dmacc.controllers;
+package dmacc.controller;
 
 import dmacc.beans.Customer;
 import dmacc.beans.Rental;
-import dmacc.beans.Vehicle;
+import dmacc.beans.vehicle;
 import dmacc.repository.CustomerRepository;
 import dmacc.repository.RentalRepository;
 import dmacc.repository.VehicleRepository;
@@ -37,7 +37,7 @@ public class RentalController {
         System.out.println("Input rental");
         Rental rental = new Rental();
         List<Customer> customers = custRepo.findAll(Sort.by("custName"));
-        List<Vehicle> vehicles = vehicleRepo.findAllActiveVehicles();
+        List<vehicle> vehicles = vehicleRepo.findAllActiveVehicles();
         model.addAttribute("customers", customers);
         model.addAttribute("vehicles", vehicles);
         model.addAttribute("rental", rental);
@@ -60,9 +60,9 @@ public class RentalController {
     }
 
     private void updateAvail( Rental rental ) {
-        Vehicle vehicle = vehicleRepo.getOne(rental.getVehicle().getVehicleId());
+        vehicle vehicle = vehicleRepo.getOne(rental.getVehicle().getVehicleId());
         vehicle.setAvailability(rental.isReturned());
-        vehicleRepo.save(vehicle);
+        VehicleRepository.save(vehicle);
     }
 
     @GetMapping("/viewRentals")

@@ -23,7 +23,7 @@ public class Rental {
     private Customer customer;
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "vehicleId", nullable = false)
-    private Vehicle vehicle;
+    private vehicle vehicle;
     private boolean returned;
 
 }

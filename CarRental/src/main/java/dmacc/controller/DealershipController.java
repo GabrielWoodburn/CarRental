@@ -1,4 +1,4 @@
-package dmacc.controllers;
+package dmacc.controller;
 
 import dmacc.beans.Dealership;
 import dmacc.repository.DealershipRepository;

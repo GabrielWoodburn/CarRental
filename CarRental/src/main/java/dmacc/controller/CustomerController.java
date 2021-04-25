@@ -1,4 +1,4 @@
-package dmacc.controllers;
+package dmacc.controller;
 
 import dmacc.beans.Customer;
 import dmacc.repository.CustomerRepository;
@@ -22,9 +22,10 @@ public class CustomerController {
 	
 	@Autowired
 	CustomerRepository repo;
+
 	
 	@GetMapping("/viewCustomers")
-	String viewAllCustomers(Model model) {
+	public String viewAllCustomers(Model model) {
 		if (repo.findAll().isEmpty()) return addNewCustomer(model);
 		List<Customer> customers = repo.findAll();
 		model.addAttribute("customers", customers);
@@ -38,38 +39,30 @@ public class CustomerController {
 		return "newCust";
 	}
 	
-<<<<<<< Updated upstream
+
 	@GetMapping("/editCust/{id}")
-	String showUpdateCustomer(@PathVariable("id") long id, Model model) {
+		public String showUpdateCustomer(@PathVariable("id") long id, Model model) {
 		Customer cust = repo.findById(id).orElse(null);
-=======
-	@GetMapping("/editCust/{custId}")
-	String showUpdateCustomer(@PathVariable("custId") long custId, Model model) {
-		Customer cust = repo.findById(custId).orElse(null);
->>>>>>> Stashed changes
-		model.addAttribute("newCust", cust);
-		return "newCust";
+		model.addAttribute("newCustomer", cust);
+		return "input";
 	}
+
+
 	
-<<<<<<< Updated upstream
-	@PostMapping("/updateCust/{id}")
-=======
-	@PostMapping("/updateCust/{custId}")
->>>>>>> Stashed changes
-	String saveCust(Customer newCust, Model model) {
+
+	@PostMapping("/updateCust/{id}") 
+		public String reviewCustomer(Customer newCust, Model model) {
 		repo.save(newCust);
 		return viewAllCustomers(model);
 	}
 
-<<<<<<< Updated upstream
+
+
 	@GetMapping("/deleteCust/{id}")
-	String deleteCust(@PathVariable("id") long id, Model model) {
-		repo.findById(id).ifPresent(repo :: delete);
-=======
-	@GetMapping("/deleteCust/{custId}")
-	String deleteCust(@PathVariable("custId") long custId, Model model) {
-		repo.findById(custId).ifPresent(repo :: delete);
->>>>>>> Stashed changes
+		public String deleteCust(@PathVariable("id") long id, Model model) {
+		Customer c = repo.findById(id).orElse(null);
+		repo.delete(c);
 		return viewAllCustomers(model);
 	}
+
 }

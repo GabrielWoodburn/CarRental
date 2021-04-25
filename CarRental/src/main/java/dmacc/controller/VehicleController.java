@@ -1,7 +1,7 @@
-package dmacc.controllers;
+package dmacc.controller;
 
 import dmacc.beans.Dealership;
-import dmacc.beans.Vehicle;
+import dmacc.beans.vehicle;
 import dmacc.repository.DealershipRepository;
 import dmacc.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +30,14 @@ public class VehicleController {
 	@GetMapping({ "/viewVehicles" })
 	public String viewAllVehicles(Model model) {
 		if(repo.findAll().isEmpty()) return addNewVehicle(model);
-		List<Vehicle> vehicles = repo.findAll();
+		List<vehicle> vehicles = repo.findAll();
 		model.addAttribute("vehicles", vehicles);
 		return "viewVehicles";
 	}
 
 	@GetMapping("/inputVehicle")
 	public String addNewVehicle(Model model) {
-		Vehicle v = new Vehicle();
+		vehicle v = new vehicle();
 		model.addAttribute("newVehicle", v);
 		List<Dealership> dealerships = dealerRepo.findAll();
 		model.addAttribute("dealerships", dealerships);
@@ -46,7 +46,7 @@ public class VehicleController {
 
 	@GetMapping("/editVehicle/{vehicleId}")
 	public String showUpdateVehicle(@PathVariable("vehicleId") long vehicleId, Model model) {
-		Vehicle vehicle = repo.findById(vehicleId).orElse(null);
+		vehicle vehicle = repo.findById(vehicleId).orElse(null);
 		model.addAttribute("newVehicle", vehicle);
 		List<Dealership> dealerships = dealerRepo.findAll();
 		model.addAttribute("dealerships", dealerships);
@@ -54,7 +54,7 @@ public class VehicleController {
 	}
 
 	@PostMapping("/updateVehicle/{vehicleId}")
-	public String reviseVehicle(Vehicle newVehicle, Model model) {
+	public String reviseVehicle(vehicle newVehicle, Model model) {
 		repo.save(newVehicle);
 		return viewAllVehicles(model);
 	}

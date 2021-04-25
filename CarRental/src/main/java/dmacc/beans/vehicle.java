@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name="vehicle")
-public class Vehicle {
+public class vehicle {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long vehicleId;
