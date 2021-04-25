@@ -38,22 +38,38 @@ public class CustomerController {
 		return "newCust";
 	}
 	
+<<<<<<< Updated upstream
 	@GetMapping("/editCust/{id}")
 	String showUpdateCustomer(@PathVariable("id") long id, Model model) {
 		Customer cust = repo.findById(id).orElse(null);
+=======
+	@GetMapping("/editCust/{custId}")
+	String showUpdateCustomer(@PathVariable("custId") long custId, Model model) {
+		Customer cust = repo.findById(custId).orElse(null);
+>>>>>>> Stashed changes
 		model.addAttribute("newCust", cust);
 		return "newCust";
 	}
 	
+<<<<<<< Updated upstream
 	@PostMapping("/updateCust/{id}")
+=======
+	@PostMapping("/updateCust/{custId}")
+>>>>>>> Stashed changes
 	String saveCust(Customer newCust, Model model) {
 		repo.save(newCust);
 		return viewAllCustomers(model);
 	}
 
+<<<<<<< Updated upstream
 	@GetMapping("/deleteCust/{id}")
 	String deleteCust(@PathVariable("id") long id, Model model) {
 		repo.findById(id).ifPresent(repo :: delete);
+=======
+	@GetMapping("/deleteCust/{custId}")
+	String deleteCust(@PathVariable("custId") long custId, Model model) {
+		repo.findById(custId).ifPresent(repo :: delete);
+>>>>>>> Stashed changes
 		return viewAllCustomers(model);
 	}
 }
