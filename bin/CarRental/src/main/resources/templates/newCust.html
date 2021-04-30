@@ -8,7 +8,7 @@
 
 <body>
 	<h2>Insert/Update Customer</h2>
-	<form id="newCust" th:object="${newCust}" th:action="@{/updateCust/{id}(id=${newCust.custId})}" method='POST'>
+	<form id="newCust" th:object="${newCust}" th:action="@{/updateCust/{id}(id=${newCust.id})}" method='POST'>
 		<table>
 			<tr>
 				<td><label for="name">Name </label>

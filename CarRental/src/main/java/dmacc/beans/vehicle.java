@@ -1,18 +1,22 @@
 package dmacc.beans;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
-@Embeddable
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name="vehicle")
 public class vehicle {
-	private long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private long vehicleId;
 	private String model;
 	private String make;
 	private int age;
 	private boolean availability;
-
+	@ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "dealerId", nullable = false)
+	private Dealership dealer;
 }

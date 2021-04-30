@@ -1,7 +1,7 @@
 package dmacc.controller;
 
-import java.util.List;
-
+import dmacc.beans.Customer;
+import dmacc.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import dmacc.beans.Customer;
-import dmacc.repository.CustomerRepository;
+import java.util.List;
 
 /**
  * Rumbi Chinhamhora rchinhamhora
@@ -23,33 +22,47 @@ public class CustomerController {
 	
 	@Autowired
 	CustomerRepository repo;
+
 	
-	@GetMapping("/")
-	String viewAllCustomers(Model model) {
+	@GetMapping("/viewCustomers")
+	public String viewAllCustomers(Model model) {
+		if (repo.findAll().isEmpty()) return addNewCustomer(model);
 		List<Customer> customers = repo.findAll();
-		if (customers.isEmpty()) return "newCust";
 		model.addAttribute("customers", customers);
 		return "viewCustomers";
 	}
 	
 	@GetMapping("/inputCustomer")
-	String addNewCustomer(Model model) {
+	public String addNewCustomer(Model model) {
 		Customer newCust = new Customer();
 		model.addAttribute("newCust", newCust);
 		return "newCust";
 	}
 	
-	@GetMapping("/edit/{id}")
-	String showUpdateCustomer(@PathVariable("id") long id, Model model) {
-		Customer cust = repo.findById(id).orElse(null);
-		model.addAttribute("newCust", cust);
-		return "newCust";
-	}
-	
-	@PostMapping("/update/{id}")
-	String saveCust(Customer newCust, Model model) {
-		repo.save(newCust);
-		return "viewCustomers";
-	}
-}
 
+	@GetMapping("/editCust/{id}")
+		public String showUpdateCustomer(@PathVariable("id") long id, Model model) {
+		Customer cust = repo.findById(id).orElse(null);
+		model.addAttribute("newCustomer", cust);
+		return "input";
+	}
+
+
+	
+
+	@PostMapping("/updateCust/{id}") 
+		public String reviewCustomer(Customer newCust, Model model) {
+		repo.save(newCust);
+		return viewAllCustomers(model);
+	}
+
+
+
+	@GetMapping("/deleteCust/{id}")
+		public String deleteCust(@PathVariable("id") long id, Model model) {
+		Customer c = repo.findById(id).orElse(null);
+		repo.delete(c);
+		return viewAllCustomers(model);
+	}
+
+}
